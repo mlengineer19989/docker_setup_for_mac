@@ -6,6 +6,10 @@
 - Multipassが万能だという記事もある。
 - とりあえず、limaが簡単そうなのでlimaで環境構築する。
 - 参考サイト(https://qiita.com/kyosuke5_20/items/cd5f3df4e827c34d7c4a, https://qiita.com/hisato_imanishi/items/91d6881ff7c4d55b9ec4)
+
+1. limaをインストール
+> brew install lima
+
 ## lima+docker環境孤竹
 - lima公式のGithubリポジトリ（https://github.com/lima-vm/lima/tree/15aba00bbb85e64c3e17ea3611b39b6503727064）
 
