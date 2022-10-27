@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+    php:
+        image: php:7.2-fpm
+        container_name: loma-php
+    nginx:
+        image: nginx
+        container_name: lima-nginx
+        depends_on:
+            - php
