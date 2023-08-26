@@ -1,4 +1,4 @@
-# Example to use Docker instead of containerd & nerdctl
+# A template to use Docker instead of containerd & nerdctl
 # $ limactl start ./docker.yaml
 # $ limactl shell docker docker run -it -v $HOME:$HOME --rm alpine
 
@@ -6,15 +6,20 @@
 # $ export DOCKER_HOST=$(limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
 # $ docker ...
 
-# This example requires Lima v0.8.0 or later
+vmType: "vz"
+rosetta: 
+  enabled: true 
+  binfmt: true
+
+# This template requires Lima v0.8.0 or later
 images:
 # Try to use release-yyyyMMdd image if available. Note that release-yyyyMMdd will be removed after several months.
-- location: "https://cloud-images.ubuntu.com/releases/22.04/release-20220902/ubuntu-22.04-server-cloudimg-amd64.img"
+- location: "https://cloud-images.ubuntu.com/releases/22.04/release-20230729/ubuntu-22.04-server-cloudimg-amd64.img"
   arch: "x86_64"
-  digest: "sha256:c777670007cc5f132417b9e0bc01367ccfc2a989951ffa225bb1952917c3aa81"
-- location: "https://cloud-images.ubuntu.com/releases/22.04/release-20220902/ubuntu-22.04-server-cloudimg-arm64.img"
+  digest: "sha256:d5b419272e01cd69bfc15cbbbc5700d2196242478a54b9f19746da3a1269b7c8"
+- location: "https://cloud-images.ubuntu.com/releases/22.04/release-20230729/ubuntu-22.04-server-cloudimg-arm64.img"
   arch: "aarch64"
-  digest: "sha256:9620f479bd5a6cbf1e805654d41b27f4fc56ef20f916c8331558241734de81ae"
+  digest: "sha256:5ecab49ff44f8e44954752bc9ef4157584b7bdc9e24f06031e777f60860a9d17"
 # Fallback to the latest release image.
 # Hint: run `limactl prune` to invalidate the cache
 - location: "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img"
@@ -23,10 +28,11 @@ images:
   arch: "aarch64"
 
 mounts:
-- location: "~/Documents"
-  writable: true
+- location: "~"
 - location: "/tmp/lima"
   writable: true
+mountType: "virtiofs" #rossetaを使用するための設定
+
 # containerd is managed by Docker, not by Lima, so the values are set to false here.
 containerd:
   system: false
