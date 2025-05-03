@@ -29,6 +29,7 @@ images:
 
 mounts:
 - location: "~"
+  writable: true # `~` 以下全てのディレクトリ内のファイルに書き込み権限を与える
 - location: "/tmp/lima"
   writable: true
 mountType: "virtiofs" #rossetaを使用するための設定
